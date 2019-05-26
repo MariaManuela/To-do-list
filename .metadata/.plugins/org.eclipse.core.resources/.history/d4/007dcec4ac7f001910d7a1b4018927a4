@@ -1,0 +1,105 @@
+package com.main;
+
+
+import java.util.ArrayList;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class TaskController {
+	
+	@Autowired
+	private TaskRepository taskRepository;
+	
+	@RequestMapping(value = "/added", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public String add(@RequestBody TaskForm taskForm) {
+		if (taskForm == null) {
+			return "Failed";
+		} else {
+		
+			Task addTask = new Task();
+			addTask.setName(taskForm.getTaskName());
+			addTask.setDescription("lala");
+			addTask.setDone(false);
+			
+			
+			taskRepository.save(addTask);
+			
+		
+			
+			return addTask.getName();
+			
+			
+		}
+		
+	}
+	
+	@RequestMapping(value = "/tasks", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<Task> getTasks() {
+		ArrayList<Task> tasks = taskRepository.findAll();
+		for (Task task : tasks) {
+			System.out.println(task.getName());
+		}
+			return tasks;
+	}
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE) 
+    @ResponseBody
+    public boolean deleteTask(@RequestParam(value = "name") String taskName) {
+
+    		Optional<Task> optionalTask = taskRepository.findByName(taskName);
+    		if(optionalTask.isPresent()) {
+    			Task task = optionalTask.get();
+    			taskRepository.delete(task);
+    			return true;
+    		}else {
+    			return false;
+    		}
+    		
+    }
+    
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = "application/json")
+	@ResponseBody
+	public String updateTask(@RequestBody EditForm editForm) {
+		if (editForm == null) {
+			return "Failed";
+		} else {
+		
+			Task addTask = new Task();
+			addTask.setName(editForm.getTaskNewName());
+			addTask.setDescription("lala");
+			addTask.setDone(false);
+			
+			
+			taskRepository.save(addTask);
+			
+		
+			
+			return addTask.getName();
+			
+			
+		}
+		
+	}
+		
+	}
+	
+   
+    		
+
+
+ 
+
+
+    
+

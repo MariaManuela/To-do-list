@@ -1,0 +1,21 @@
+package com.main;
+
+import java.util.Date;
+
+public class TaskForm {
+
+	private String taskName;
+	
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
+
+}

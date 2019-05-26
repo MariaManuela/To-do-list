@@ -1,0 +1,8 @@
+package com.main;
+
+public class EditTaskDTO {
+	
+	private String oldName;
+	private String newName;
+
+}

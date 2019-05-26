@@ -1,0 +1,22 @@
+$(document).ready(
+		function () {
+			var id = elem.data('id');
+			$.ajax ({
+				url:'/deleted/' + id,
+				type:'DELETE',
+				error: function(data) {
+					console.log("Error")
+				},
+				success : $(".deleteBtn").on("click", function () {
+					return {
+						"id" : $('#id').val()
+						
+					  };
+					})
+			
+				
+		});
+		
+
+		
+});

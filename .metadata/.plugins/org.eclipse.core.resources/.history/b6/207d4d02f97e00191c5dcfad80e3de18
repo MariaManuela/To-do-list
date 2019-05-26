@@ -1,0 +1,27 @@
+@charset "ISO-8859-1";
+
+.taskStyle {
+  font-family: Stencil Std, fantasy;
+  font-size: 30px;
+  text-align: left;
+  float: left;
+  
+  
+ 
+}
+
+.task-flex-container {
+	display: flex;
+    justify-content: center;
+    padding: 50px;
+ 
+}
+
+.edit-button {
+	float: right;
+	/*width: 50px;
+    height: 20px;*/
+    display: inline-block;
+    font-size: 16px;
+    
+}

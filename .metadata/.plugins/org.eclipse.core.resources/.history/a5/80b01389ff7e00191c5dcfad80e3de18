@@ -1,0 +1,21 @@
+$(document).ready(
+		function () {
+			$.ajax ({
+				url:'/deleted',
+				type:'DELETE',
+				error: function(data) {
+					console.log("Error")
+				},
+				success : $(".deleteBtn").on("click", function () {
+					return {
+						"id" : $('#id').val()
+						
+					  };
+					})
+			
+				
+		});
+		
+
+		
+});

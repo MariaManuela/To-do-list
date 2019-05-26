@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>MY TO DO LIST</title>
+<link rel="stylesheet" type="text/css" href="css/buttonStyle.css">
+<link rel="stylesheet" type="text/css" href="css/tableStyle.css">
+<link rel="stylesheet" type="text/css" href="css/tasksStyle.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>window.jQuery || document.write('https://code.jquery.com/jquery-3.2.1.min.js')</script>
+<script src="/js/addTask.js"></script>
+<script src="/js/deleteTask.js"></script>
+</head>
+<body background="images/stickyNotes.png">
+
+
+	<p class="fontStyle">MY TO DO LIST</p>
+
+<div class="flex-container">
+	<input type="text" id="task-name" name="taskName" placeholder="Add new task...">
+   	<button class="addBtn button addTaskButton"  >Add Task</button>
+	
+   
+</div>
+    
+<div style="overflow-x:auto;">
+<div class="table-flex-container fontstyle">
+		<table class="center">
+		 <tr>
+  			<th>First Name</th>
+  			<th>Last Name</th>
+  			<th>Points</th>
+  		 </tr>
+		</table>
+
+		</div>
+
+	
+</div>
+
+				
+<div class = "task-flex-container">
+		<p id="task-list" class="taskStyle"></p>
+
+
+</div>
+
+</body>
+</html>

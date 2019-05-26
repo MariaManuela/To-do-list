@@ -1,0 +1,18 @@
+  $(document).ready(function () {
+        $("#deleteBtn").click(function () {
+            var getId = $(this).attr("id");
+            $.ajax({
+                url: "/deleted",
+                type: "DELETE",
+                data: { id: getId },
+                success: function () {
+                    $('#task-list' + getId).remove();
+                    console.log("dap");
+                },
+                error: function () {
+                    console.log("nup");
+                }
+
+            });
+        });
+    });

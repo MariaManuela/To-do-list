@@ -1,0 +1,20 @@
+$(document).ready(
+		function () {
+			$('.deleteBtn').click(deleteForm);
+			$.ajax ({
+				url:'/deleted',
+				type:'DELETE',
+				error: function(data) {
+					console.log("Error")
+				},
+				success : $("#send").on("click", function (data) {
+					data.forEach(function (element) {
+						$('#task-list').remove();
+					})
+				})
+				
+		});
+		
+
+		
+});

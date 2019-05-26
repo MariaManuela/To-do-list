@@ -1,0 +1,12 @@
+package com.main;
+
+import java.util.ArrayList;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface TaskRepository extends CrudRepository<Task, Long> {
+	
+	ArrayList<Task> findAll();
+
+	Object findByName(String taskName);
+}

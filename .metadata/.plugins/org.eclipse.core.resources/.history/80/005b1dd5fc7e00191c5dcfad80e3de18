@@ -1,0 +1,18 @@
+$(document).ready(
+		function deleteTask(link) {
+		
+			$.ajax ({
+				url:'/deleted/'
+				type:'DELETE',
+				error: function(data) {
+					console.log("Error")
+				},
+				success: $('.deleteBtn').on("click", function(data) {
+					data.forEach(function (element) {
+						$('#task-list').remove();
+						console.log("done")
+					});
+				})
+			})
+		});
+		

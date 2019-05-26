@@ -1,0 +1,22 @@
+package com.main;
+
+public class EditForm {
+	private String taskNewName;
+	private String description;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getTaskNewName() {
+		return taskNewName;
+	}
+
+	public void setTaskNewName(String taskNewName) {
+		this.taskNewName = taskNewName;
+	}
+}

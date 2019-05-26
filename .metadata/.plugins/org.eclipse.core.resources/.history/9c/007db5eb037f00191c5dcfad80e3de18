@@ -1,0 +1,17 @@
+$(document).ready(
+		function () {
+
+			$.ajax ({
+				url:'/deleted',
+				type:'DELETE',
+				dataType : "json",
+				error: function(data) {
+					console.log("Error")
+				},
+				success :
+					console.log("caca")
+				})
+				
+
+		
+			});

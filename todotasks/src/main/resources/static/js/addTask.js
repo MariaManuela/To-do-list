@@ -37,9 +37,9 @@ function check(element) {
 }
 
 function editTask(index) {
-	var parent = $('#editBtn'+index).parent();
+	var parent = $('#editBtn'+index).parent().parent();
 	console.log(parent.children(".task-name" ).text());
-	var oldName = parent.children(".task-name" ).text();
+	var oldName = parent.children().children(".task-name" ).text();
 
 	parent.children().hide();
 	parent.append('<div id="dynamic-form"> Edit name: <input id="input-name" type="text" value="' + oldName +'"> <button id="saveBtn">Save</button></div><button id=cancel>Cancel</button>')
@@ -50,26 +50,28 @@ function editTask(index) {
 	});
 	$('#saveBtn').click(function(){
 		var newName = $('#input-name').val();
-		var editNameDTO = {
-				"oldName": oldName,
-				"newName": newName
-		}
-		$.ajax({
-			url: "/edit",
-			type: "PUT",
-			contentType : "application/json",
-			data: JSON.stringify(editNameDTO),
-			success: function (data) {
-				if(data) {
-					$("#task-list").load(location.href+" #task-list>*","");
-					loadTasks();
-				}
-			},
-			error: function (data) {
-				console.log("nup");
+		if(newName.trim() != 0) {
+			var editNameDTO = {
+					"oldName": oldName,
+					"newName": newName
 			}
-			
-		});
+			$.ajax({
+				url: "/edit",
+				type: "PUT",
+				contentType : "application/json",
+				data: JSON.stringify(editNameDTO),
+				success: function (data) {
+					if(data) {
+						$("#task-list").load(location.href+" #task-list>*","");
+						loadTasks();
+					}
+				},
+				error: function (data) {
+					console.log("nup");
+				}
+				
+			});
+		}
 	});
 }
 
@@ -90,13 +92,13 @@ function loadTasks() {
 				date = element.startDate.substring(0, element.startDate.indexOf('T'));
 				taskName = encodeURIComponent(element.name);
 				console.log(element.done);
-				$('#task-list').append('<div class=task><input id="done' + index +'" onclick="check(this)" type="checkbox"/><div class="task-name">' + element.name + '</div><div class="task-start-date">'
+				$('#task-list').append('<div class=task><div class="first"><input id="done' + index +'" onclick="check(this)" type="checkbox"/><div class="task-name">' + element.name + '</div></div><div class="second"><div class="task-start-date">'
 										+ date + '</div><button id = "editBtn' + index + 
 						               '" type="button" onclick=editTask("'+ index +
 						               '") class="edit-button" >' + "Edit" + '<button id = "deleteBtn' + index + 
 							               ' type="button" onclick=deleteTask("'+ taskName +
 							               '") class="delete-button" >' + "Delete" +
-						               '</div>'
+						               '</div></div>'
 									  );
 				if(element.done) {
 					console.log("PE TRUE");
@@ -131,33 +133,31 @@ $(document).ready(
 			$('.addBtn').click(submitForm);
 			
 			function submitForm() {
-				var taskInfo = getTaskInfo();
-		
-
-				
-				$.ajax({
-					type: "POST",
-					url: "/added",
-					contentType : "application/json",
-					data : JSON.stringify(getTaskInfo()),
-					error: function(data) {
-						console.log("Error")
-						alert("Internal Server Error");
+				if(getTaskInfo().taskName.trim() != 0){
+					$.ajax({
+						type: "POST",
+						url: "/added",
+						contentType : "application/json",
+						data : JSON.stringify(getTaskInfo()),
+						error: function(data) {
+							console.log("Error")
+							alert("Internal Server Error");
+							
+						},
 						
-					},
-					
-					success : function(data) {
-						 if(data) {
-							 $("#task-list").load(location.href+" #task-list>*","");
-						     loadTasks();
-						     $('#task-name').val('');
-
-						 }else {
-							 alert("Error");
-						 }
-						
-					}
-				});
+						success : function(data) {
+							if(data) {
+								$("#task-list").load(location.href+" #task-list>*","");
+								loadTasks();
+								$('#task-name').val('');
+								
+							}else {
+								alert("Error");
+							}
+							
+						}
+					});
+				}
 				
 			 }
 

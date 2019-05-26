@@ -19,7 +19,7 @@
 	display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-  	align-content: space-around;
+  	justify-content: space-between;
 	border: 5px solid olivedrab;
 	background-color: bisque;
 	border-radius: 50px;
@@ -28,11 +28,23 @@
 	margin-bottom: 10px;
 }
 
+.first {
+	display: flex;
+	padding: 0px;
+	
+}
+
+.second {
+	display: flex;
+	padding: 0px;
+}
+
 #task-list {
   	overflow-y: scroll;
   	min-width: 700px; 
   	height: 400px;
 }
+
 
 .task-flex-container {
 	display: flex;
@@ -43,6 +55,8 @@
 }
 .task-start-date, .task-name {
 	padding: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
 	
 }
 
@@ -50,6 +64,21 @@
 	float: right;
     display: inline-block;
     font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
     
-    
+}
+
+.delete-button {
+	margin-left: 5px;
+}
+
+#edit-form, #dynamic-form {
+	display: flex;
+	padding: 0px;
+	margin-left: 5px;
+}
+.dynamic-form {
+	padding: 0px;
+	
 }

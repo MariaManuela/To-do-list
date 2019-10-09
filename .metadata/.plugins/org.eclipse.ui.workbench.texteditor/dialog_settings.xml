@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="check"/>
 		<list key="findhistory">
+			<item value="check"/>
 			<item value="space-between"/>
 			<item value="editTaskDTO"/>
 			<item value="task-list"/>

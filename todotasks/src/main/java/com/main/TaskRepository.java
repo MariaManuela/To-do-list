@@ -1,6 +1,7 @@
 package com.main;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -15,6 +16,8 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 	boolean existsByName(String taskName);
 
 	ArrayList<Task> findAllByOrderByStartDateDesc();
+
+	List<Task> findByNameLike(String name);
 
 	
 

@@ -17,7 +17,7 @@ function deleteTask(elementName) {
 }
 
 function check(element) {
-	var parent = $(element).parent();
+	var parent = $(element).parent();// first
 	var isDone = $(element).is(":checked");
 	var name = parent.children(".task-name" ).text();
 	 $.ajax({
@@ -37,15 +37,15 @@ function check(element) {
 }
 
 function editTask(index) {
-	var parent = $('#editBtn'+index).parent().parent();
+	var parent = $('#editBtn'+index).parent().parent(); //task
 	console.log(parent.children(".task-name" ).text());
-	var oldName = parent.children().children(".task-name" ).text();
+	var oldName = parent.children().children(".task-name" ).text(); //numele vechi (ia textul)
 
-	parent.children().hide();
+	parent.children().hide(); //ascunde tot ce e in divu cu clasa first
 	parent.append('<div id="dynamic-form"> Edit name: <input id="input-name" type="text" value="' + oldName +'"> <button id="saveBtn">Save</button></div><button id=cancel>Cancel</button>')
-	$('#cancel').click(function(){
+	$('#cancel').click(function(){ 
 		$('#cancel').remove();
-		$('#dynamic-form').remove();
+		$('#dynamic-form').remove(); 
 		parent.children().show();
 	});
 	$('#saveBtn').click(function(){
@@ -76,6 +76,8 @@ function editTask(index) {
 }
 
 
+
+
 function loadTasks() {
 	$.ajax({
 		type: "GET",
@@ -85,32 +87,7 @@ function loadTasks() {
 			console.log("Error")
 		},
 		success : function (data) {
-			var index = 0;
-			var date;
-			var taskName;
-			data.forEach(function (element) {
-				date = element.startDate.substring(0, element.startDate.indexOf('T'));
-				taskName = encodeURIComponent(element.name);
-				console.log(element.done);
-				$('#task-list').append('<div class=task><div class="first"><input id="done' + index +'" onclick="check(this)" id="form-checkbox" type="checkbox"/><div class="task-name">' + element.name + '</div></div><div class="second"><div class="task-start-date">'
-										+ date + '</div><button id = "editBtn' + index + 
-						               '" type="button" onclick=editTask("'+ index +
-						               '") class="edit-button" >' + "Edit" + '<button id = "deleteBtn' + index + 
-							               ' type="button" onclick=deleteTask("'+ taskName +
-							               '") class="delete-button" >' + "Delete" +
-						               '</div></div>'
-									  );
-				if(element.done) {
-					console.log("PE TRUE");
-					$('#done'+index).attr('checked', true);
-					$('#done'+index).parent().children(".task-name" ).addClass("done");
-				}else {
-					console.log("PE FALSE");
-					$('#done'+index).attr('checked', false);
-					$('#done'+index).parent().children(".task-name" ).removeClass("done");
-				}
-				index++;
-			})
+			data.forEach(createTask)
 				$('.hide-input').hide();
 			   
 	
@@ -119,20 +96,47 @@ function loadTasks() {
 	});
 }
 
+createTask = (element) => {
+		var index = 0;
+		var date;
+		var taskName;
+		date = element.startDate.substring(0, element.startDate.indexOf('T'));
+		taskName = encodeURIComponent(element.name);
+		console.log(element.done);
+		$('#task-list').append('<div class=task><div class="first"><input id="done' + index +'" onclick="check(this)" id="form-checkbox" type="checkbox"/><div class="task-name">' + element.name + '</div></div><div class="second"><div class="task-start-date">'
+								+ date + '</div><button id = "editBtn' + index + 
+				               '" type="button" onclick=editTask("'+ index +
+				               '") class="edit-button" >' + "Edit" + '<button id = "deleteBtn' + index + 
+					               ' type="button" onclick=deleteTask("'+ taskName +
+					               '") class="delete-button" >' + "Delete" +
+				               '</div></div>'
+							  );
+		if(element.done) {
+			console.log("PE TRUE");
+			$('#done'+index).attr('checked', true);
+			$('#done'+index).parent().children(".task-name" ).addClass("done");
+		}else {
+			console.log("PE FALSE");
+			$('#done'+index).attr('checked', false);
+			$('#done'+index).parent().children(".task-name" ).removeClass("done");
+		}
+		index++;
+}
 
 
 $(document).ready(
-	
 		
 		function() {
-			
+	
 			
 			loadTasks();
 			console.log($('#done'));
 			
 			$('.addBtn').click(submitForm);
+
 			
 			function submitForm() {
+			
 				if(getTaskInfo().taskName.trim() != 0){
 					$.ajax({
 						type: "POST",
@@ -159,6 +163,8 @@ $(document).ready(
 					});
 				}
 				
+		
+				
 			 }
 
 		
@@ -169,8 +175,19 @@ $(document).ready(
 			};
 		}
 		
-		
+		$('#searchForm').on('input', filter);
+	   
+	    function filter(item) {
+	    	let taskList = $("#task-list").children().toArray();
+
+	    		let value = this.value.toLowerCase().trim();
+	    		$("div.task-list, div.task, div.first, div.start-task-date").show().filter(function() {
+	    			return $(this).text().toLowerCase().trim().indexOf(value) == -1;
+	    		}).hide();
+	  
+	    }
 
 
-		
+
+				
 });

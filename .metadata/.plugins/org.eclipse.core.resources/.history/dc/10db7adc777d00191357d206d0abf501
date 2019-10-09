@@ -1,8 +1,0 @@
-package com.main;
-
-import org.springframework.data.repository.CrudRepository;
-
-public interface TaskRepository extends CrudRepository<Task, Long> {
-	
-	List<Task> findAll();
-}

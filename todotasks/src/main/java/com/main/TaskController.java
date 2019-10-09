@@ -1,13 +1,12 @@
 package com.main;
 
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -93,9 +92,20 @@ public class TaskController {
 		}
 	}
     
- 
-		
+
+  @RequestMapping(value = "/search", method=RequestMethod.GET)
+  @ResponseBody
+  public List<Task> searchTask(@RequestParam (name = "taskName") String name ) {
+
+	  if(!taskRepository.findByNameLike(name).isEmpty()) {
+		  return taskRepository.findByNameLike(name);
+	  }else {
+		  return new ArrayList<Task>();
+	  }
+		  
+  }
 }
+
 	
    
     		

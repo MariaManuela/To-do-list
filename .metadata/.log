@@ -1964,3 +1964,15 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-10-09 11:24:40.943
 !MESSAGE executing callback sts4.classpath.qvtDjvmI SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-10-09 11:26:25.735
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.qvtDjvmI
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-10-09 11:26:25.757
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.qvtDjvmI
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-10-09 11:26:25.776
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-10-09 11:26:25.784
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.qvtDjvmI => OK
